@@ -38,8 +38,9 @@
         this.url = '';
         var reqkeys = ['baseUrl', 'targets', 'success'];
         var keys = Object.keys(this.options);
-        for (var i = 0; i < reqkeys; i++) {
-            keys.splice(reqkeys[i], reqkeys[i]);
+        for (var i = 0; i < reqkeys.length; i++) {
+            var ki = keys.indexOf(reqkeys[i]);
+            keys.splice(ki, ki !== 0 ? ki : ki + 1);
         }
         // http[s]:// url prefix
         if (this.options.baseUrl.match(/^http[s]{0,1}:\/\//) === null) {
@@ -61,7 +62,7 @@
         }
         // parse options
         keys.forEach(function(key) {
-            that.url += '&' + key + '=' + this.options[key];
+            that.url += '&' + key + '=' + that.options[key];
         });
         // cross domain policy for jsonp
         if (this.options.format === 'json' &&
