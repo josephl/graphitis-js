@@ -36,16 +36,18 @@
     Graphite.prototype.generateUrl = function() {
         var that = this;
         this.url = '';
-        var keys = _.without(Object.keys(this.options),
-            'baseUrl', 'targets', 'success');
-        // http:// url prefix
+        var reqkeys = ['baseUrl', 'targets', 'success'];
+        var keys = Object.keys(this.options);
+        for (var i = 0; i < reqkeys; i++) {
+            keys.splice(reqkeys[i], reqkeys[i]);
+        }
+        // http[s]:// url prefix
         if (this.options.baseUrl.match(/^http[s]{0,1}:\/\//) === null) {
             this.url = 'http://' + this.options.baseUrl;
         }
         else {
             this.url = this.options.baseUrl;
         }
-        // trailing '/'
         if (this.url[this.url.length - 1] !== '/') {
             this.url += '/';
         }
