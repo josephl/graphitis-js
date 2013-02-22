@@ -12,7 +12,7 @@
 // var graphite = new Graphite({
 //     baseUrl: 'https://graphite.dev.awbdev.org',  *
 //     targets: ['statsd.lomo.i3.signup.attempts'], *
-//     success: function(d) { ... }                 *
+//     success: function(d) { ... },                *
 //     format: 'json',
 //     from: '-2d',
 //     until: '-1d'
@@ -71,12 +71,19 @@
     /* define jquery ajax call */
     Graphite.prototype.ajax = function() {
         var that = this;
-        $.ajax({
+        var ajaxOptions = {
             url: that.url,
             dataType: that.options.format,
-            jsonp: 'jsonp',
             success: that.options.success
-        });
-    }
+        };
+        if (this.options.format === 'json' &&
+            typeof this.options.jsonp === 'undefined') {
+            ajaxOptions.jsonp = 'jsonp';
+        }
+        if (this.options.format === 'raw') {
+            ajaxOptions.format = 'text';
+        }
+        $.ajax(ajaxOptions);
+    };
 
 }) (jQuery);
