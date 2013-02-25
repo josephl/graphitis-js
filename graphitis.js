@@ -64,7 +64,7 @@
         return this;
     };
 
-    Graphite.prototype.set = function(option, value) {
+    Graphitis.prototype.set = function(option, value) {
         var objType = Object.prototype.toString.call(option);
         if (objType === '[object Object]' && typeof value === 'undefined') {
             keys = Object.keys(option);
@@ -79,7 +79,7 @@
         return this;
     }
 
-    Graphite.prototype.get = function(key) {
+    Graphitis.prototype.get = function(key) {
         if (typeof key === 'undefined') {
             return this.options;
         }
