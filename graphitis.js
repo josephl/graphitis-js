@@ -7,6 +7,7 @@
     Graphitis = function (options) {
         this.options = options;
         this.generateUrl();
+        return this;
     };
 
     Graphitis.prototype.generateUrl = function() {
@@ -42,6 +43,7 @@
             typeof this.options.jsonp === 'undefined') {
             this.url += '&jsonp=?';
         }
+        return this;
     }
 
     Graphitis.prototype.ajax = function() {
@@ -59,6 +61,7 @@
             ajaxOptions.format = 'text';
         }
         $.ajax(ajaxOptions);
+        return this;
     };
 
     Graphite.prototype.set = function(param, value) {
