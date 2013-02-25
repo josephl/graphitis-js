@@ -9,6 +9,11 @@ Each Graphitis object must be supplied with an object containing at least the fo
 * `targets`: array of strings of Graphite metric names.
 * `success`: callback function for successful Ajax request.
 
+Get/Set
+-----
+* The `get(key)` method returns values for the specified option key. If a key is not specified, the entire `options` object is returned. This method is meant to be used strictly for members of the `options` object within the Graphitis object, and not the other direct members of the Graphitis object itself. The exception is specifying `url` as the key to this method, which is not a member of `options`.
+* The `set(...)` method allows for the assignment of options with a single key-value pair (e.g. `set('from', '-2d')`) or any number of options by passing an object as the sole argument (e.g. `set({ from: '-2d', until: '-1d' })`). The `url` of the Graphitis object is automatically updated with each `set` call.
+
 Example
 -----
 ```
