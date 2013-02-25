@@ -61,4 +61,29 @@
         $.ajax(ajaxOptions);
     };
 
+    Graphite.prototype.set = function(param, value) {
+        var objType = Object.prototype.toString.call(param);
+        if (objType === '[object Object]' && typeof value === 'undefined') {
+            keys = Object.keys(param);
+            for (var k = 0; k < keys.length; k++) {
+                this.options[keys[k]] = param[keys[k]];
+            }
+        }
+        else if (objType === '[object String]') {
+            this.options[param] = value;
+        }
+        this.generateUrl();
+        return this;
+    }
+
+    Graphite.prototype.get = function(key) {
+        if (typeof key === 'undefined') {
+            return this.options;
+        }
+        else if (key === 'url') {
+            return this.url;
+        }
+        return this.options[key];
+    }
+
 }) (jQuery);
