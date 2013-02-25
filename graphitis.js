@@ -5,7 +5,7 @@
 (function($) {
 
     Graphitis = function (options) {
-        this.options = options;
+        this.options = $.extend(true, {}, options);
         this.generateUrl();
         return this;
     };
@@ -64,16 +64,16 @@
         return this;
     };
 
-    Graphite.prototype.set = function(param, value) {
-        var objType = Object.prototype.toString.call(param);
+    Graphite.prototype.set = function(option, value) {
+        var objType = Object.prototype.toString.call(option);
         if (objType === '[object Object]' && typeof value === 'undefined') {
-            keys = Object.keys(param);
+            keys = Object.keys(option);
             for (var k = 0; k < keys.length; k++) {
-                this.options[keys[k]] = param[keys[k]];
+                this.options[keys[k]] = option[keys[k]];
             }
         }
         else if (objType === '[object String]') {
-            this.options[param] = value;
+            this.options[option] = value;
         }
         this.generateUrl();
         return this;
