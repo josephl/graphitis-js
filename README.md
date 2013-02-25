@@ -5,6 +5,7 @@ A [jQuery][jquery] library for handling the [Graphite Render URL API][graphite-u
 Options
 -----
 Each Graphitis object must be supplied with an object containing at least the following values:
+
 * `baseUrl`: string of the base URL to the Graphite server.
 * `targets`: array of strings of Graphite metric names.
 * `success`: callback function for successful Ajax request.
