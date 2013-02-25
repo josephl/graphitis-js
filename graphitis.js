@@ -11,12 +11,13 @@
     };
 
     Graphitis.prototype.generateUrl = function() {
-        var that = this;
+        var that = this,
+            reqkeys = ['baseUrl', 'targets', 'success'],
+            keys = Object.keys(this.options),
+            i, ki;
         this.url = '';
-        var reqkeys = ['baseUrl', 'targets', 'success'];
-        var keys = Object.keys(this.options);
-        for (var i = 0; i < reqkeys.length; i++) {
-            var ki = keys.indexOf(reqkeys[i]);
+        for (i = 0; i < reqkeys.length; i++) {
+            ki = keys.indexOf(reqkeys[i]);
             keys.splice(ki, ki !== 0 ? ki : ki + 1);
         }
         if (this.options.baseUrl.match(/^http[s]{0,1}:\/\//) === null) {
@@ -44,7 +45,7 @@
             this.url += '&jsonp=?';
         }
         return this;
-    }
+    };
 
     Graphitis.prototype.ajax = function() {
         var that = this;
@@ -65,10 +66,11 @@
     };
 
     Graphitis.prototype.set = function(option, value) {
-        var objType = Object.prototype.toString.call(option);
+        var objType = Object.prototype.toString.call(option),
+            k;
         if (objType === '[object Object]' && typeof value === 'undefined') {
             keys = Object.keys(option);
-            for (var k = 0; k < keys.length; k++) {
+            for (k = 0; k < keys.length; k++) {
                 this.options[keys[k]] = option[keys[k]];
             }
         }
@@ -77,7 +79,7 @@
         }
         this.generateUrl();
         return this;
-    }
+    };
 
     Graphitis.prototype.get = function(key) {
         if (typeof key === 'undefined') {
@@ -87,6 +89,6 @@
             return this.url;
         }
         return this.options[key];
-    }
+    };
 
-}) (jQuery);
+} (jQuery));
