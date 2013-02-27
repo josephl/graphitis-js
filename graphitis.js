@@ -4,7 +4,13 @@
 
 (function($) {
 
-    Graphitis = function (options) {
+    Graphitis = function (options, context) {
+        if (typeof context !== 'undefined') {
+            this.context = context;
+        }
+        else {
+            this.context = this;
+        }
         this.options = $.extend(true, {}, options);
         this.generateUrl();
         return this;
@@ -52,7 +58,8 @@
         var ajaxOptions = {
             url: that.url,
             dataType: this.options.format,
-            success: this.options.success
+            success: this.options.success,
+            context: this.context
         };
         if (this.options.format === 'json' &&
             typeof this.options.jsonp === 'undefined') {
@@ -61,6 +68,7 @@
         if (this.options.format === 'raw') {
             ajaxOptions.format = 'text';
         }
+        //test
         $.ajax(ajaxOptions);
         return this;
     };
