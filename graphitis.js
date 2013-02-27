@@ -91,4 +91,11 @@
         return this.options[key];
     };
 
+    Graphitis.prototype.size = function() {
+        if (typeof this.get('targets') === undefined) {
+            return 0;
+        }
+        return this.get('targets').length;
+    }
+
 } (jQuery));
